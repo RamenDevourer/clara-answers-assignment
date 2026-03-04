@@ -1,0 +1,501 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Clara Answers - Deployment Dashboard</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; color: #333; }
+            h1 { color: #2c3e50; }
+            .metrics { display: flex; gap: 20px; margin-bottom: 30px; }
+            .metric-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex: 1; text-align: center; }
+            .metric-card h3 { margin: 0; color: #7f8c8d; font-size: 14px; text-transform: uppercase; }
+            .metric-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: #2980b9; }
+            table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
+            th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background: #2c3e50; color: #fff; }
+            .status-yes { color: #27ae60; font-weight: bold; }
+            .status-no { color: #c0392b; font-weight: bold; }
+            .diff-viewer { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .diff-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+            del { color: #c0392b; background: #fadbd8; text-decoration: none; padding: 2px 4px; border-radius: 3px; }
+            ins { color: #27ae60; background: #d5f5e3; text-decoration: none; padding: 2px 4px; border-radius: 3px; }
+        </style>
+    </head>
+    <body>
+        <h1>Clara Answers Deployments</h1>
+        
+        <div class="metrics">
+            <div class="metric-card"><h3>Total Accounts</h3><p>6</p></div>
+            <div class="metric-card"><h3>v1 Generated</h3><p>6</p></div>
+            <div class="metric-card"><h3>v2 Updated</h3><p>6</p></div>
+            <div class="metric-card"><h3>Total Changes Tracked</h3><p>65</p></div>
+        </div>
+
+        <h2>Account Status</h2>
+        <table>
+            <tr><th>Account ID</th><th>Pipeline A (v1)</th><th>Pipeline B (v2)</th><th>Changes</th></tr>
+            <tr><td>account_1</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>15 updates</td></tr><tr><td>account_2</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>9 updates</td></tr><tr><td>account_6</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>11 updates</td></tr><tr><td>account_7</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>11 updates</td></tr><tr><td>account_8</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>10 updates</td></tr><tr><td>account_9</td><td class='status-yes'>Complete</td><td class='status-yes'>Complete</td><td>9 updates</td></tr>
+        </table>
+
+        <h2>Diff Viewer (Changelogs)</h2>
+        <div class="diff-viewer">
+    <h3>account_1</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> company_name<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ Ben Penoyer's Electrical Business</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Unknown", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}</del><br>
+                    <ins>+ {"days": "Monday to Friday", "start": "8:30", "end": "5:00", "timezone": "Unknown"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> services_supported<br>
+                    <del>- ["Residential", "Commercial", "Service calls", "Projects"]</del><br>
+                    <ins>+ ["Residential", "Commercial", "Service calls", "Projects", "new clients", "small jobs", "service calls", "existing working relationships"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["Electrician"]</del><br>
+                    <ins>+ ["Electrician", "one specific property management client called G&M Pressure Washing"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ Answer calls and forward to Ben if he does not answer or decline.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> non_emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ Contact customer the next business day.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> call_transfer_rules<br>
+                    <del>- {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}</del><br>
+                    <ins>+ {"timeouts": "Ben does not answer or decline calls", "retries": "Only if customer insists on speaking directly with Ben", "fallback_message": "Contact Clara if Ben is unavailable"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> integration_constraints<br>
+                    <del>- ["Seeks integration with Jobber CRM"]</del><br>
+                    <ins>+ ["Seeks integration with Jobber CRM", "Android-based call forwarding setup"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> after_hours_flow_summary<br>
+                    <del>- Ben personally on call for emergencies</del><br>
+                    <ins>+ No general emergency calls after hours, except for G&M Pressure Washing.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> office_hours_flow_summary<br>
+                    <del>- Ben manages most of the office/admin work himself</del><br>
+                    <ins>+ Ben answers calls during office hours, with Clara taking over once second number is active.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing company_name", "Missing details in business_hours: days, start, end, timezone", "Missing office_address", "Missing emergency_routing_rules", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: timeouts, retries, fallback_message"]</del><br>
+                    <ins>+ ["Missing details in business_hours: timezone", "Missing office_address"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- Unknown Clara Assistant (v1)</del><br>
+                    <ins>+ Ben Penoyer's Electrical Business Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Unknown. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Unknown from Unknown to Unknown Unknown\n- Services Provided: Residential, Commercial, Service calls, Projects\n- Emergency Definitions: Electrician\n- Emergency Routing Protocol: Unknown\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Seeks integration with Jobber CRM\n- Office Hours Context: Ben manages most of the office/admin work himself\n- After Hours Context: Ben personally on call for emergencies\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (Residential, Commercial, Service calls, Projects).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: Electrician.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "Unknown"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Ben Penoyer's Electrical Business. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 8:30 to 5:00 Unknown\n- Services Provided: Residential, Commercial, Service calls, Projects, new clients, small jobs, service calls, existing working relationships\n- Emergency Definitions: Electrician, one specific property management client called G&M Pressure Washing\n- Emergency Routing Protocol: Answer calls and forward to Ben if he does not answer or decline.\n- Non-Emergency Protocol: Contact customer the next business day.\n- Software Constraints: Seeks integration with Jobber CRM, Android-based call forwarding setup\n- Office Hours Context: Ben answers calls during office hours, with Clara taking over once second number is active.\n- After Hours Context: No general emergency calls after hours, except for G&M Pressure Washing.\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (Residential, Commercial, Service calls, Projects, new clients, small jobs, service calls, existing working relationships).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: Electrician, one specific property management client called G&M Pressure Washing.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Contact customer the next business day.).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "Answer calls and forward to Ben if he does not answer or decline."}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "Unknown", "business_hours_raw": {"days": "Unknown", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}, "services_supported": ["Residential", "Commercial", "Service calls", "Projects"], "emergency_definition": ["Electrician"], "emergency_routing_raw": "Unknown", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Seeks integration with Jobber CRM"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "Unknown", "business_hours_raw": {"days": "Monday to Friday", "start": "8:30", "end": "5:00", "timezone": "Unknown"}, "services_supported": ["Residential", "Commercial", "Service calls", "Projects", "new clients", "small jobs", "service calls", "existing working relationships"], "emergency_definition": ["Electrician", "one specific property management client called G&M Pressure Washing"], "emergency_routing_raw": "Answer calls and forward to Ben if he does not answer or decline.", "non_emergency_routing_raw": "Contact customer the next business day.", "call_transfer_rules": {"timeouts": "Ben does not answer or decline calls", "retries": "Only if customer insists on speaking directly with Ben", "fallback_message": "Contact Clara if Ben is unavailable"}, "integration_constraints": ["Seeks integration with Jobber CRM", "Android-based call forwarding setup"], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                <h3>account_2</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Monday to Friday", "start": "9:00 AM", "end": "5:00 PM", "timezone": "UTC"}</del><br>
+                    <ins>+ {"days": "Monday to Friday", "start": "09:00 AM", "end": "06:00 PM", "timezone": "PST"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["Emergency Service"]</del><br>
+                    <ins>+ ["Emergency Service", "Emergency services only"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- 555-0001</del><br>
+                    <ins>+ 555-0002</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> office_hours_flow_summary<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ We operate from 9AM to 6PM PST</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing office_address", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: fallback_message", "Missing after_hours_flow_summary", "Missing office_hours_flow_summary"]</del><br>
+                    <ins>+ ["Missing office_address", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: fallback_message", "Missing after_hours_flow_summary"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- Elite HVAC Clara Assistant (v1)</del><br>
+                    <ins>+ Elite HVAC Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Elite HVAC. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 9:00 AM to 5:00 PM UTC\n- Services Provided: Air Conditioner Repair\n- Emergency Definitions: Emergency Service\n- Emergency Routing Protocol: 555-0001\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown\n- Office Hours Context: Unknown\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (Air Conditioner Repair).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: Emergency Service.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0001"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Elite HVAC. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 09:00 AM to 06:00 PM PST\n- Services Provided: Air Conditioner Repair\n- Emergency Definitions: Emergency Service, Emergency services only\n- Emergency Routing Protocol: 555-0002\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown\n- Office Hours Context: We operate from 9AM to 6PM PST\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (Air Conditioner Repair).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: Emergency Service, Emergency services only.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0002"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "UTC", "business_hours_raw": {"days": "Monday to Friday", "start": "9:00 AM", "end": "5:00 PM", "timezone": "UTC"}, "services_supported": ["Air Conditioner Repair"], "emergency_definition": ["Emergency Service"], "emergency_routing_raw": "555-0001", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "3 seconds", "retries": "5", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "PST", "business_hours_raw": {"days": "Monday to Friday", "start": "09:00 AM", "end": "06:00 PM", "timezone": "PST"}, "services_supported": ["Air Conditioner Repair"], "emergency_definition": ["Emergency Service", "Emergency services only"], "emergency_routing_raw": "555-0002", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "3 seconds", "retries": "5", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                <h3>account_6</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Monday to Friday", "start": "8", "end": "17", "timezone": "Unknown"}</del><br>
+                    <ins>+ {"days": "Monday, Tuesday, Wednesday, Thursday, Friday", "start": "8:00 AM", "end": "6:00 PM", "timezone": "Central Time"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> services_supported<br>
+                    <del>- ["AC", "heating"]</del><br>
+                    <ins>+ ["AC", "heating", "HVAC"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["total AC failure in summer", "furnace failure in winter"]</del><br>
+                    <ins>+ ["total AC failure in summer", "furnace failure in winter", "total system failure in extreme weather or gas leaks"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- send to on-call guy after hours</del><br>
+                    <ins>+ 555-0101</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> non_emergency_routing_rules<br>
+                    <del>- take a message</del><br>
+                    <ins>+ Take name and number, call next morning</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> after_hours_flow_summary<br>
+                    <del>- send to on-call guy</del><br>
+                    <ins>+ Take name and number, call next morning</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing details in business_hours: timezone", "Missing office_address", "Missing details in call_transfer_rules: timeouts, retries, fallback_message"]</del><br>
+                    <ins>+ ["Missing office_address", "Missing details in call_transfer_rules: timeouts, retries, fallback_message"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- Frosty Air HVAC Clara Assistant (v1)</del><br>
+                    <ins>+ Frosty Air HVAC Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Frosty Air HVAC. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 8 to 17 Unknown\n- Services Provided: AC, heating\n- Emergency Definitions: total AC failure in summer, furnace failure in winter\n- Emergency Routing Protocol: send to on-call guy after hours\n- Non-Emergency Protocol: take a message\n- Software Constraints: Unknown\n- Office Hours Context: take a message\n- After Hours Context: send to on-call guy\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (AC, heating).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: total AC failure in summer, furnace failure in winter.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (take a message).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "send to on-call guy after hours"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Frosty Air HVAC. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday, Tuesday, Wednesday, Thursday, Friday from 8:00 AM to 6:00 PM Central Time\n- Services Provided: AC, heating, HVAC\n- Emergency Definitions: total AC failure in summer, furnace failure in winter, total system failure in extreme weather or gas leaks\n- Emergency Routing Protocol: 555-0101\n- Non-Emergency Protocol: Take name and number, call next morning\n- Software Constraints: Unknown\n- Office Hours Context: take a message\n- After Hours Context: Take name and number, call next morning\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (AC, heating, HVAC).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: total AC failure in summer, furnace failure in winter, total system failure in extreme weather or gas leaks.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Take name and number, call next morning).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0101"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "Unknown", "business_hours_raw": {"days": "Monday to Friday", "start": "8", "end": "17", "timezone": "Unknown"}, "services_supported": ["AC", "heating"], "emergency_definition": ["total AC failure in summer", "furnace failure in winter"], "emergency_routing_raw": "send to on-call guy after hours", "non_emergency_routing_raw": "take a message", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "Central Time", "business_hours_raw": {"days": "Monday, Tuesday, Wednesday, Thursday, Friday", "start": "8:00 AM", "end": "6:00 PM", "timezone": "Central Time"}, "services_supported": ["AC", "heating", "HVAC"], "emergency_definition": ["total AC failure in summer", "furnace failure in winter", "total system failure in extreme weather or gas leaks"], "emergency_routing_raw": "555-0101", "non_emergency_routing_raw": "Take name and number, call next morning", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                <h3>account_7</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Mon-Fri", "start": "7 AM", "end": "4 PM", "timezone": "Unknown"}</del><br>
+                    <ins>+ {"days": "Monday to Friday", "start": "7:00 AM", "end": "4:00 PM", "timezone": "Eastern Time"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> services_supported<br>
+                    <del>- ["residential wiring", "commercial wiring"]</del><br>
+                    <ins>+ ["residential wiring", "commercial wiring", "full configuration"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["sparking panels", "complete power loss"]</del><br>
+                    <ins>+ ["sparking panels", "complete power loss", "exposed live wires", "total power loss"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ 555-0202</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> call_transfer_rules<br>
+                    <del>- {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}</del><br>
+                    <ins>+ {"timeouts": "45 seconds", "retries": "Unknown", "fallback_message": "We are paging dispatch immediately."}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> integration_constraints<br>
+                    <del>- ["Unknown"]</del><br>
+                    <ins>+ ["Unknown", "Do not schedule any generator maintenance after hours."]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing details in business_hours: timezone", "Missing office_address", "Missing emergency_routing_rules", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: timeouts, retries, fallback_message", "Missing office_hours_flow_summary"]</del><br>
+                    <ins>+ ["Missing office_address", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: retries", "Missing office_hours_flow_summary"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- Sparkline Electrical Clara Assistant (v1)</del><br>
+                    <ins>+ Sparkline Electrical Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Sparkline Electrical. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Mon-Fri from 7 AM to 4 PM Unknown\n- Services Provided: residential wiring, commercial wiring\n- Emergency Definitions: sparking panels, complete power loss\n- Emergency Routing Protocol: Unknown\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown\n- Office Hours Context: Unknown\n- After Hours Context: Clara handles overflow and after-hours calls.\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (residential wiring, commercial wiring).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: sparking panels, complete power loss.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "Unknown"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Sparkline Electrical. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 7:00 AM to 4:00 PM Eastern Time\n- Services Provided: residential wiring, commercial wiring, full configuration\n- Emergency Definitions: sparking panels, complete power loss, exposed live wires, total power loss\n- Emergency Routing Protocol: 555-0202\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown, Do not schedule any generator maintenance after hours.\n- Office Hours Context: Unknown\n- After Hours Context: Clara handles overflow and after-hours calls.\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (residential wiring, commercial wiring, full configuration).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: sparking panels, complete power loss, exposed live wires, total power loss.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0202"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "Unknown", "business_hours_raw": {"days": "Mon-Fri", "start": "7 AM", "end": "4 PM", "timezone": "Unknown"}, "services_supported": ["residential wiring", "commercial wiring"], "emergency_definition": ["sparking panels", "complete power loss"], "emergency_routing_raw": "Unknown", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "Eastern Time", "business_hours_raw": {"days": "Monday to Friday", "start": "7:00 AM", "end": "4:00 PM", "timezone": "Eastern Time"}, "services_supported": ["residential wiring", "commercial wiring", "full configuration"], "emergency_definition": ["sparking panels", "complete power loss", "exposed live wires", "total power loss"], "emergency_routing_raw": "555-0202", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "45 seconds", "retries": "Unknown", "fallback_message": "We are paging dispatch immediately."}, "integration_constraints": ["Unknown", "Do not schedule any generator maintenance after hours."], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                <h3>account_8</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Monday-Saturday", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}</del><br>
+                    <ins>+ {"days": "Monday, Tuesday, Wednesday, Thursday, Friday", "start": "08:00 AM", "end": "05:00 PM", "timezone": "Pacific Time"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> services_supported<br>
+                    <del>- ["general plumbing", "water heaters", "burst pipes", "active flooding"]</del><br>
+                    <ins>+ ["general plumbing", "water heaters", "burst pipes", "active flooding", "plumbing"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["burst pipes", "active flooding"]</del><br>
+                    <ins>+ ["burst pipes", "active flooding", "active flooding, burst pipes, raw sewage backups"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ 555-0303</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> non_emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ call back next business day</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing details in business_hours: start, end, timezone", "Missing office_address", "Missing emergency_routing_rules", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: timeouts, retries, fallback_message", "Missing after_hours_flow_summary", "Missing office_hours_flow_summary"]</del><br>
+                    <ins>+ ["Missing office_address", "Missing details in call_transfer_rules: timeouts, retries, fallback_message", "Missing after_hours_flow_summary", "Missing office_hours_flow_summary"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- FlowState Plumbing Clara Assistant (v1)</del><br>
+                    <ins>+ FlowState Plumbing Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for FlowState Plumbing. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday-Saturday from Unknown to Unknown Unknown\n- Services Provided: general plumbing, water heaters, burst pipes, active flooding\n- Emergency Definitions: burst pipes, active flooding\n- Emergency Routing Protocol: Unknown\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown\n- Office Hours Context: Unknown\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (general plumbing, water heaters, burst pipes, active flooding).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: burst pipes, active flooding.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "Unknown"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for FlowState Plumbing. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday, Tuesday, Wednesday, Thursday, Friday from 08:00 AM to 05:00 PM Pacific Time\n- Services Provided: general plumbing, water heaters, burst pipes, active flooding, plumbing\n- Emergency Definitions: burst pipes, active flooding, active flooding, burst pipes, raw sewage backups\n- Emergency Routing Protocol: 555-0303\n- Non-Emergency Protocol: call back next business day\n- Software Constraints: Unknown\n- Office Hours Context: Unknown\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (general plumbing, water heaters, burst pipes, active flooding, plumbing).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: burst pipes, active flooding, active flooding, burst pipes, raw sewage backups.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (call back next business day).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0303"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "Unknown", "business_hours_raw": {"days": "Monday-Saturday", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}, "services_supported": ["general plumbing", "water heaters", "burst pipes", "active flooding"], "emergency_definition": ["burst pipes", "active flooding"], "emergency_routing_raw": "Unknown", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "Pacific Time", "business_hours_raw": {"days": "Monday, Tuesday, Wednesday, Thursday, Friday", "start": "08:00 AM", "end": "05:00 PM", "timezone": "Pacific Time"}, "services_supported": ["general plumbing", "water heaters", "burst pipes", "active flooding", "plumbing"], "emergency_definition": ["burst pipes", "active flooding", "active flooding, burst pipes, raw sewage backups"], "emergency_routing_raw": "555-0303", "non_emergency_routing_raw": "call back next business day", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                <h3>account_9</h3>
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> business_hours<br>
+                    <del>- {"days": "Unknown", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}</del><br>
+                    <ins>+ {"days": "Monday to Friday", "start": "6:00 AM", "end": "4:00 PM", "timezone": "Eastern Time"}</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_definition<br>
+                    <del>- ["sprinkler leaks", "fire alarm panel actively beeping"]</del><br>
+                    <ins>+ ["sprinkler leaks", "fire alarm panel actively beeping", "sprinkler head activation", "panel actively beeping", "fire marshal currently on site"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> emergency_routing_rules<br>
+                    <del>- Unknown</del><br>
+                    <ins>+ 555-0404</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> integration_constraints<br>
+                    <del>- ["Unknown"]</del><br>
+                    <ins>+ ["Unknown", "Never create sprinkler jobs in ServiceTrade"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> notes<br>
+                    <del>- v1 generated from demo call via LLM.</del><br>
+                    <ins>+ v2 updated after onboarding call via LLM extraction and Python merge.</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> memo.json | <strong>Field:</strong> questions_or_unknowns<br>
+                    <del>- ["Missing details in business_hours: days, start, end, timezone", "Missing office_address", "Missing emergency_routing_rules", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: timeouts, retries, fallback_message", "Missing after_hours_flow_summary", "Missing office_hours_flow_summary"]</del><br>
+                    <ins>+ ["Missing office_address", "Missing non_emergency_routing_rules", "Missing details in call_transfer_rules: timeouts, retries, fallback_message", "Missing after_hours_flow_summary", "Missing office_hours_flow_summary"]</ins><br>
+                    <em>Reason: Updated based on operational logic confirmed during onboarding.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> agent_name<br>
+                    <del>- Guardian Fire & Safety Clara Assistant (v1)</del><br>
+                    <ins>+ Guardian Fire & Safety Clara Assistant (v2)</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> retellLlmData<br>
+                    <del>- {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Guardian Fire & Safety. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Unknown from Unknown to Unknown Unknown\n- Services Provided: sprinkler, alarm contractors\n- Emergency Definitions: sprinkler leaks, fire alarm panel actively beeping\n- Emergency Routing Protocol: Unknown\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown\n- Office Hours Context: Unknown\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (sprinkler, alarm contractors).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: sprinkler leaks, fire alarm panel actively beeping.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "Unknown"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</del><br>
+                    <ins>+ {"model": "gpt-4o", "general_prompt": "## Identity\nYou are Clara, the automated assistant for Guardian Fire & Safety. You are professional and empathetic.\n\n## Context & Operational Variables\n- Business Hours: Monday to Friday from 6:00 AM to 4:00 PM Eastern Time\n- Services Provided: sprinkler, alarm contractors\n- Emergency Definitions: sprinkler leaks, fire alarm panel actively beeping, sprinkler head activation, panel actively beeping, fire marshal currently on site\n- Emergency Routing Protocol: 555-0404\n- Non-Emergency Protocol: Unknown\n- Software Constraints: Unknown, Never create sprinkler jobs in ServiceTrade\n- Office Hours Context: Unknown\n- After Hours Context: Unknown\n\n## Task\nFollow these workflows strictly based on the time of day:\n\nBUSINESS HOURS FLOW:\n1. Greet the caller and ask the purpose of their call.\n2. Collect their name and phone number.\n3. Determine if their request matches our supported services (sprinkler, alarm contractors).\n4. Attempt to route or transfer the call using the transfer_call tool.\n5. If transfer fails, apologize, assure follow-up, and ask if they need anything else.\n6. Close call using end_call if they need nothing else.\n\nAFTER HOURS FLOW:\n1. Greet and ask purpose.\n2. Confirm if it is an emergency based on this definition: sprinkler leaks, fire alarm panel actively beeping, sprinkler head activation, panel actively beeping, fire marshal currently on site.\n3. If emergency: immediately collect name, number, and address. Use the transfer_call tool to route appropriately.\n4. If transfer fails: apologize and assure follow-up.\n5. If non-emergency: collect details and confirm follow-up (Unknown).\n6. Ask if they need anything else and use end_call to close.\n\n## Style Guardrails\n- Do not ask unnecessary questions.\n- Do not mention function calls, AI constraints, or system tools to the caller.", "general_tools": [{"type": "transfer_call", "name": "transfer_call", "description": "Transfer the call to a human agent or emergency contact.", "transfer_destination": {"type": "predefined", "number": "555-0404"}, "transfer_option": {"type": "cold_transfer"}}, {"type": "end_call", "name": "end_call", "description": "Hang up the call when the conversation is finished or fallback is needed."}], "start_speaker": "agent"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+                <div class="diff-item">
+                    <strong>File:</strong> agent_spec.json | <strong>Field:</strong> metadata<br>
+                    <del>- {"timezone": "Unknown", "business_hours_raw": {"days": "Unknown", "start": "Unknown", "end": "Unknown", "timezone": "Unknown"}, "services_supported": ["sprinkler", "alarm contractors"], "emergency_definition": ["sprinkler leaks", "fire alarm panel actively beeping"], "emergency_routing_raw": "Unknown", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown"], "version": "v1"}</del><br>
+                    <ins>+ {"timezone": "Eastern Time", "business_hours_raw": {"days": "Monday to Friday", "start": "6:00 AM", "end": "4:00 PM", "timezone": "Eastern Time"}, "services_supported": ["sprinkler", "alarm contractors"], "emergency_definition": ["sprinkler leaks", "fire alarm panel actively beeping", "sprinkler head activation", "panel actively beeping", "fire marshal currently on site"], "emergency_routing_raw": "555-0404", "non_emergency_routing_raw": "Unknown", "call_transfer_rules": {"timeouts": "Unknown", "retries": "Unknown", "fallback_message": "Unknown"}, "integration_constraints": ["Unknown", "Never create sprinkler jobs in ServiceTrade"], "version": "v2"}</ins><br>
+                    <em>Reason: Regenerated to reflect new operational context.</em>
+                </div>
+                
+        </div>
+    </body>
+    </html>
+    

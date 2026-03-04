@@ -1,0 +1,43 @@
+{
+    "company_name": "FlowState Plumbing",
+    "business_hours": {
+        "days": "Monday-Saturday",
+        "start": "Unknown",
+        "end": "Unknown",
+        "timezone": "Unknown"
+    },
+    "office_address": "Unknown",
+    "services_supported": [
+        "general plumbing",
+        "water heaters",
+        "burst pipes",
+        "active flooding"
+    ],
+    "emergency_definition": [
+        "burst pipes",
+        "active flooding"
+    ],
+    "emergency_routing_rules": "Unknown",
+    "non_emergency_routing_rules": "Unknown",
+    "call_transfer_rules": {
+        "timeouts": "Unknown",
+        "retries": "Unknown",
+        "fallback_message": "Unknown"
+    },
+    "integration_constraints": [
+        "Unknown"
+    ],
+    "after_hours_flow_summary": "Unknown",
+    "office_hours_flow_summary": "Unknown",
+    "account_id": "account_8",
+    "notes": "v1 generated from demo call via LLM.",
+    "questions_or_unknowns": [
+        "Missing details in business_hours: start, end, timezone",
+        "Missing office_address",
+        "Missing emergency_routing_rules",
+        "Missing non_emergency_routing_rules",
+        "Missing details in call_transfer_rules: timeouts, retries, fallback_message",
+        "Missing after_hours_flow_summary",
+        "Missing office_hours_flow_summary"
+    ]
+}

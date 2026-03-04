@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.egg-info/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.log
+
+# Misc
+.cache/
+tmp/
+temp/
+
+# Account 1 files
+*account_1*

@@ -1,0 +1,2 @@
+Agent: Let's get Sparkline Electrical fully configured.
+Client: Official hours are Monday to Friday, 7:00 AM to 4:00 PM Eastern Time. Emergencies are sparking panels, exposed live wires, or total power loss. Route emergencies to 555-0202. If that transfer fails after 45 seconds, the fallback message should be 'We are paging dispatch immediately.' Non-emergencies just get logged for the next day. Constraint: Do not schedule any generator maintenance after hours.

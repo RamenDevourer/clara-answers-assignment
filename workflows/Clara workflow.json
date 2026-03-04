@@ -1,0 +1,379 @@
+{
+  "name": "Clara workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        688,
+        480
+      ],
+      "id": "904cf671-069b-418a-a1b2-afd61daba259",
+      "name": "Loop Over Items",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "fileSelector": "/data/inputs/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        480
+      ],
+      "id": "9ab39cfa-8548-4d75-988e-8cba3de86c39",
+      "name": "Read input transcripts - Batch Processing"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $binary.data.fileName }}",
+                    "rightValue": "demo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "105b5257-64c8-458c-8326-1d01303c8b05"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "58549a44-09fd-47dd-b843-8c927f3fc325",
+                    "leftValue": "={{ $binary.data.fileName }}",
+                    "rightValue": "onboarding",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        912,
+        240
+      ],
+      "id": "ede8ff45-a59c-44f9-9065-cba254b01583",
+      "name": "Switch between demo and onboard pipelines"
+    },
+    {
+      "parameters": {
+        "command": "=python3 /data/scripts/pipeline_v2.py {{ $binary.data.directory + '/' + $binary.data.fileName }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        384
+      ],
+      "id": "dab764ab-04c7-460d-a774-65660ce9686b",
+      "name": "Pipeline - Onboarding",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        480
+      ],
+      "id": "cefbdfbf-0d06-4990-bf30-e50e17852d24",
+      "name": "Batch Processing - Click ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "workspace": "1213542976677723",
+        "name": "=Agent v2 and Changelog successfully created for: {{ JSON.parse($json.stdout).account_id }}",
+        "otherProperties": {
+          "notes": "=",
+          "projects": [
+            "1213543268675206"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.asana",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        672
+      ],
+      "id": "4eb1787c-cb57-4baf-b40d-f9e5b4686ca4",
+      "name": "Task Tracker - Asana (Onboarding)",
+      "credentials": {
+        "asanaApi": {
+          "id": "btrmlW6kjiqkbJC1",
+          "name": "Asana account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workspace": "1213542976677723",
+        "name": "=Preliminary Agent v1 created for: {{ JSON.parse($json.stdout).account_id }}",
+        "otherProperties": {
+          "notes": "=",
+          "projects": [
+            "1213543268675206"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.asana",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        240
+      ],
+      "id": "f9c62ab0-7b3a-4de3-9552-00df42b25e59",
+      "name": "Task Tracker - Asana (Demo)",
+      "credentials": {
+        "asanaApi": {
+          "id": "btrmlW6kjiqkbJC1",
+          "name": "Asana account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workspace": "1213542976677723",
+        "name": "=Agent v2 and Changelog Failed for: {{ $json.fileName }}",
+        "otherProperties": {
+          "notes": "=Error: {{ $json.error }}",
+          "projects": [
+            "1213543268675206"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.asana",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        464
+      ],
+      "id": "89ed979b-046b-44d1-9d75-24d8d585b5a3",
+      "name": "On Error Task Tracker - Asana",
+      "credentials": {
+        "asanaApi": {
+          "id": "btrmlW6kjiqkbJC1",
+          "name": "Asana account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=python3 /data/scripts/pipeline_v1.py {{ $binary.data.directory + \"/\" + $binary.data.fileName }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        192
+      ],
+      "id": "b0cd0222-9064-4181-afe6-030610c20133",
+      "name": "Pipeline - Demo",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "command": "python3 /data/scripts/generate_dashboard.py"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        912,
+        48
+      ],
+      "id": "b9fbbc0d-615d-450a-aa3f-8d782021cee8",
+      "name": "Generate Dashboard"
+    }
+  ],
+  "pinData": {
+    "Batch Processing - Click ‘Execute workflow’": [
+      {
+        "json": {},
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Generate Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch between demo and onboard pipelines",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Read input transcripts - Batch Processing": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch between demo and onboard pipelines": {
+      "main": [
+        [
+          {
+            "node": "Pipeline - Demo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Pipeline - Onboarding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pipeline - Onboarding": {
+      "main": [
+        [
+          {
+            "node": "Task Tracker - Asana (Onboarding)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "On Error Task Tracker - Asana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Batch Processing - Click ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read input transcripts - Batch Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Task Tracker - Asana (Onboarding)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Task Tracker - Asana (Demo)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On Error Task Tracker - Asana": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pipeline - Demo": {
+      "main": [
+        [
+          {
+            "node": "Task Tracker - Asana (Demo)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "On Error Task Tracker - Asana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "49356cfb-5ff0-40f7-a260-6a5ddf2ac233",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec890685d2fb541ed984f881f2e85be2b0c02b5f6934bad3083939254af4540b"
+  },
+  "id": "HmNFTWtMnilAwc69",
+  "tags": []
+}

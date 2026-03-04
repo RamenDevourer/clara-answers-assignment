@@ -1,0 +1,1 @@
+Client: Hi, I run Frosty Air HVAC. We need an AI to answer calls. We do AC and heating. Emergencies are mostly total AC failure in the summer or furnace failure in winter. We're open 8 to 5 usually. If someone calls after hours with an emergency, I want the AI to send it to the on-call guy. For normal stuff, just take a message.

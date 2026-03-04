@@ -1,0 +1,43 @@
+{
+    "company_name": "Guardian Fire & Safety",
+    "business_hours": {
+        "days": "Monday to Friday",
+        "start": "6:00 AM",
+        "end": "4:00 PM",
+        "timezone": "Eastern Time"
+    },
+    "office_address": "Unknown",
+    "services_supported": [
+        "sprinkler",
+        "alarm contractors"
+    ],
+    "emergency_definition": [
+        "sprinkler leaks",
+        "fire alarm panel actively beeping",
+        "sprinkler head activation",
+        "panel actively beeping",
+        "fire marshal currently on site"
+    ],
+    "emergency_routing_rules": "555-0404",
+    "non_emergency_routing_rules": "Unknown",
+    "call_transfer_rules": {
+        "timeouts": "Unknown",
+        "retries": "Unknown",
+        "fallback_message": "Unknown"
+    },
+    "integration_constraints": [
+        "Unknown",
+        "Never create sprinkler jobs in ServiceTrade"
+    ],
+    "after_hours_flow_summary": "Unknown",
+    "office_hours_flow_summary": "Unknown",
+    "account_id": "account_9",
+    "notes": "v2 updated after onboarding call via LLM extraction and Python merge.",
+    "questions_or_unknowns": [
+        "Missing office_address",
+        "Missing non_emergency_routing_rules",
+        "Missing details in call_transfer_rules: timeouts, retries, fallback_message",
+        "Missing after_hours_flow_summary",
+        "Missing office_hours_flow_summary"
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "company_name": "FlowState Plumbing",
+    "business_hours": {
+        "days": "Monday, Tuesday, Wednesday, Thursday, Friday",
+        "start": "08:00 AM",
+        "end": "05:00 PM",
+        "timezone": "Pacific Time"
+    },
+    "office_address": "Unknown",
+    "services_supported": [
+        "general plumbing",
+        "water heaters",
+        "burst pipes",
+        "active flooding",
+        "plumbing"
+    ],
+    "emergency_definition": [
+        "burst pipes",
+        "active flooding",
+        "active flooding, burst pipes, raw sewage backups"
+    ],
+    "emergency_routing_rules": "555-0303",
+    "non_emergency_routing_rules": "call back next business day",
+    "call_transfer_rules": {
+        "timeouts": "Unknown",
+        "retries": "Unknown",
+        "fallback_message": "Unknown"
+    },
+    "integration_constraints": [
+        "Unknown"
+    ],
+    "after_hours_flow_summary": "Unknown",
+    "office_hours_flow_summary": "Unknown",
+    "account_id": "account_8",
+    "notes": "v2 updated after onboarding call via LLM extraction and Python merge.",
+    "questions_or_unknowns": [
+        "Missing office_address",
+        "Missing details in call_transfer_rules: timeouts, retries, fallback_message",
+        "Missing after_hours_flow_summary",
+        "Missing office_hours_flow_summary"
+    ]
+}

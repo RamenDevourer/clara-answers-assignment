@@ -1,0 +1,32 @@
+services:
+  n8n:
+    build: .
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - N8N_RESTRICT_FILE_ACCESS_TO=/data
+      - NODES_EXCLUDE=[]
+    volumes:
+      - n8n_data:/root/.n8n
+      - ./workflows:/data/workflows
+      - ./scripts:/data/scripts
+      - ./outputs:/data/outputs
+      - ./changelog:/data/changelog
+      - ./inputs:/data/inputs
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  n8n_data:
+  ollama_data:

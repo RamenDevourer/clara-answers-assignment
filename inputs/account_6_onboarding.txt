@@ -1,0 +1,2 @@
+Agent: Let's finalize the setup for Frosty Air HVAC.
+Client: Our exact hours are Monday through Friday, 8:00 AM to 6:00 PM Central Time. For emergencies—which we strictly define as total system failure in extreme weather or gas leaks—transfer the call to 555-0101. For non-emergencies after hours, just take their name and number and we'll call them the next morning. One strict rule: never book commercial jobs through the AI, those must be handled by our sales team.
