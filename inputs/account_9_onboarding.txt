@@ -1,2 +1,0 @@
-Agent: Let's finalize Guardian Fire & Safety.
-Client: Hours are Monday to Friday, 6:00 AM to 4:00 PM Eastern Time. Emergencies are defined as sprinkler head activation, panel actively beeping, or a fire marshal currently on site. Route these emergencies to 555-0404. If that fails, tell the caller we are notifying the on-call technician. Non-emergencies are mostly inspection scheduling, so collect their details for that. Integration constraint: Never create sprinkler jobs in ServiceTrade.

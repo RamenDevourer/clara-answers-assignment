@@ -1,2 +1,0 @@
-Agent: Let's lock in the details for FlowState Plumbing.
-Client: Our hours are Monday through Friday 8:00 AM to 5:00 PM, and Saturday 8:00 AM to 2:00 PM Pacific Time. Emergencies are active flooding, burst pipes, and raw sewage backups. Transfer those to 555-0303. For non-emergencies, just tell them we will call back the next business day. Important: Clara should never troubleshoot water heater issues, just collect their info and end the call.
