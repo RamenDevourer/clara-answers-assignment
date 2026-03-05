@@ -1,6 +1,5 @@
 # Clara Answers - AI Agent Onboarding Automation Pipeline
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-required-inactive.svg)](https://www.docker.com/)
 [![n8n](https://img.shields.io/badge/n8n-orchestration-red.svg)](https://n8n.io/)
 
@@ -39,7 +38,7 @@ This assignment was created for the ZenTrades AI hiring process and demonstrates
 - ✅ Change tracking and versioning with detailed changelogs
 - ✅ Interactive HTML dashboard with batch metrics
 - ✅ Asana task integration for team collaboration
-- ✅ Comprehensive error handling and logging
+- ✅ Comprehensive error handling
 - ✅ Zero-cost LLM inference using local Ollama
 
 ## How It Works
@@ -47,22 +46,26 @@ This assignment was created for the ZenTrades AI hiring process and demonstrates
 ### Stage 1: Demo Call Processing (Pipeline v1)
 
 1. **Input**: Demo transcript (e.g., `account_1_demo.txt`)
-2. **Extraction**: LLM extracts initial operational assumptions
-3. **Output**: 
+2. **Extraction**: LLM extracts initial operational assumptions and creates memo.json
+3. **Missing Data**: Add all unknown's to questions_or_unknowns field in memo.json
+4. **Create agent_spec**: Generate Agent Specification config from memo.json (took sample reference from retell ai templates)
+5. **Output**: 
    - `memo.json` - Preliminary operational rules
    - `agent_spec.json` - Initial Retell AI agent configuration
-4. **Tracking**: Asana task created for v1 completion
+6. **Tracking**: Asana task created for v1 completion
 
 ### Stage 2: Onboarding Call Processing (Pipeline v2)
 
 1. **Input**: Onboarding transcript (e.g., `account_1_onboarding.txt`)
-2. **Extraction**: LLM extracts finalized operational constraints
+2. **Extraction**: LLM extracts initial operational assumptions and creates memo.json
 3. **Merging**: Compares and merges v1 with v2 data
-4. **Output**:
+3. **Missing Data**: Add all unknown's to questions_or_unknowns field to final memo v2
+4. **Create agent_spec**: Generate Agent Specification config from memo.json (took sample reference from retell ai templates)
+5. **Output**:
    - `memo.json` (v2) - Updated operational rules
    - `agent_spec.json` (v2) - Production-ready agent configuration
-5. **Changelog**: Documents all changes between v1 and v2
-6. **Tracking**: Asana tasks created for v2 completion and changelog
+6. **Changelog**: Documents all changes between v1 and v2
+7. **Tracking**: Asana tasks created for v2 completion and changelog
 
 ### Stage 3: Dashboard Generation
 
@@ -77,9 +80,11 @@ Demo Transcript
     ↓
 [Ollama LLM Extraction]
     ↓
-memo.json (v1) + agent_spec.json (v1)
+memo.json (v1)
     ↓
-         ↓ (Asana Task Created)
+generate agent_spec.json (v1)
+    ↓
+(Asana Task Created)
          ↓
 Onboarding Transcript
     ↓
@@ -130,15 +135,11 @@ clara-answers-assignment/
 ├── scripts/                         # Python processing scripts
 │   ├── pipeline_v1.py              # Demo processing → v1
 │   ├── pipeline_v2.py              # Onboarding → v2 merge
-│   ├── extract_v1.py               # Legacy: direct extraction
-│   ├── extract_v2.py               # Legacy: direct extraction
-│   ├── diff_v1_v2.py               # Legacy: diff generation
 │   └── generate_dashboard.py       # Dashboard HTML creation
 │
 ├── workflows/                       # n8n workflow definitions
-│   └── My workflow.json            # Complete orchestration workflow
+│   └── Clara workflow.json            # Complete orchestration workflow
 │
-├── temp/                           # Temporary processing files
 ├── docker-compose.yml              # Docker services configuration
 ├── Dockerfile                      # Custom image (Node + Python)
 ├── .gitignore                      # Git ignore rules
@@ -159,25 +160,6 @@ clara-answers-assignment/
 - Ollama with Llama 3.2 model
 - n8n (open-source workflow automation)
 
-### Getting Your Asana API Token
-
-Asana provides a **free tier with unlimited task creation**, which is perfect for this assignment that uses only free tools.
-
-**Steps to get your Asana API token:**
-
-1. **Create a free Asana account** (if you don't have one):
-   - Go to https://asana.com
-   - Sign up with your email (free tier offers plenty of functionality)
-
-2. **Generate an API token**:
-   - In Asana, go to **Settings** → **Apps** → **Personal Access Tokens**
-   - Click **Create new token**
-   - Name it something like "Clara Pipeline"
-   - Copy the generated token (save it somewhere safe)
-   - **⚠️ Important:** You'll only see this token once, so copy it immediately
-
-3. **Keep your token ready** for n8n configuration in Step 4 of the Detailed Setup
-
 ## Quick Start
 
 ```bash
@@ -188,13 +170,14 @@ cd clara-answers-assignment
 # 2. Start all services (build and run in background)
 docker compose up --build -d
 
-# 3. Wait 30-60 seconds for services to initialize
+# 3. Wait for services to initialize
 # Then open n8n in your browser
 http://localhost:5678
 
 # 4. In n8n:
 #    - Create a new workflow
 #    - Import: workflows/My workflow.json
+#    - Add Asana API key in credentials
 #    - Click "Execute Workflow"
 
 # 5. View results
@@ -206,7 +189,7 @@ http://localhost:5678
 ### Step 1: Clone and Enter Directory
 
 ```bash
-git clone https://github.com/yourusername/clara-answers-assignment.git
+git clone <repository-url>
 cd clara-answers-assignment
 ```
 
@@ -215,9 +198,6 @@ cd clara-answers-assignment
 ```bash
 # Build Docker image and start all services in background
 docker compose up --build -d
-
-# Verify services are running
-docker ps
 
 # Expected output should show containers for:
 # - n8n (port 5678)
@@ -245,15 +225,13 @@ inputs/
 2. Sign up / log in (initial credentials can be anything)
 3. Click **New** to create a new workflow
 4. Look for the **Import** button in the top menu
-5. Select `workflows/My workflow.json`
+5. Select `workflows/Clara workflow.json`
 6. Click **Save workflow**
 
 ### Step 5: Configure Asana Credentials in n8n
 
-The workflow contains 3 Asana nodes. You'll configure credentials on one of them, and it will be available to all:
-
-1. In the imported workflow, click on any of the **Asana nodes** (you'll see them labeled in the workflow)
-2. In the right panel, find the **Credential** section
+1. In the imported workflow, click and open on any of the **Asana nodes** (you'll see them labeled in the workflow)
+2. The first input field should be for Credentials
 3. Click the dropdown next to "Asana API" to create a new credential
 4. In the credential dialog that appears, paste your Asana API token in the **Token** field
 5. Click **Save** and then **Close**
@@ -273,16 +251,6 @@ The workflow contains 3 Asana nodes. You'll configure credentials on one of them
 - **Changelogs**: Found in `changelog/account_X/`
 
 ## Usage
-
-### Running the Workflow
-
-```bash
-# Services must be running (from docker compose up)
-# Then simply:
-# 1. Open http://localhost:5678
-# 2. Import the workflow
-# 3. Click "Execute Workflow"
-```
 
 ### Processing Custom Data
 
@@ -428,7 +396,7 @@ Human-readable markdown changelog for documentation:
 
 ### dashboard.html
 
-Interactive web dashboard with:
+Simple web dashboard with:
 - Total accounts processed
 - v1 and v2 completion metrics
 - Visual diff viewer for all changes
@@ -459,8 +427,7 @@ Interactive web dashboard with:
   - Error tasks for pipeline failures
 
 ### Error Handling
-- Graceful failure handling with error tasks
-- Detailed error logging in Asana
+- error logging in Asana on pipeline script fail
 - Pipeline continues on script failures
 
 ### Dashboard & Reporting
@@ -468,39 +435,11 @@ Interactive web dashboard with:
 - Batch metrics and status overview
 - Visual diff viewer for all changes
 
-## Troubleshooting
-
-### Common Issues
-
-**Issue**: LLM output is inconsistent
-- This is expected behavior with Llama 3.2
-- Increase temperature/sampling parameters in pipeline scripts if needed
-
-### Checking Logs
-
-```bash
-# Check if files are being created
-ls -la outputs/accounts/
-ls -la changelog/
-```
-
-### Stopping Services
-
-```bash
-# Stop all services
-docker compose down
-
-# Stop and remove volumes (careful - deletes outputs)
-docker compose down -v
-
-# Restart services
-docker compose up -d
-```
 
 ## Architecture Details
 
 ### Technology Stack
-- **Orchestration**: n8n (low-code workflow automation)
+- **Orchestration**: n8n - 'node:20-bookworm-slim' build image (low-code workflow automation)
 - **LLM Provider**: Ollama (local, zero-cost inference)
 - **Model**: Llama 3.2 (7B parameters)
 - **Processing**: Python 3 (data extraction, merging, formatting)
@@ -512,11 +451,6 @@ docker compose up -d
 - **Custom**: Node 20 + Python 3 (for running scripts)
 - **Ollama**: Official Ollama image with Llama 3.2
 
-## License
-
-This project is licensed under the MIT License.
-
----
-
 **Built for**: ZenTrades AI Hiring Process  
 **Project Purpose**: Automating Agent Onboarding at Scale
+**By**: Priyanshu Burde priyanshuburde2004@gmail.com
